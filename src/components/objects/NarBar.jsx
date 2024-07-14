@@ -8,29 +8,41 @@ const NavBar = () => {
     const tabRefs = useRef([]);
     const navRef = useRef(null);
 
-    const onClickTab = (tabName, index) => {
-        changeSelTab(tabName);
+    const updateTabInfo = (index) => {
         const tabElement = tabRefs.current[index];
         if (tabElement && navRef.current) {
             const tabRect = tabElement.getBoundingClientRect();
             const navRect = navRef.current.getBoundingClientRect();
             setSelTabInfo({ left: tabRect.left - navRect.left, width: tabRect.width });
         }
-    }
+    };
+
+    const onClickTab = (tabName, index) => {
+        changeSelTab(tabName);
+        updateTabInfo(index);
+    };
 
     useEffect(() => {
         const initialTabIndex = tabs.indexOf(selTab);
-        const initialTab = tabRefs.current[initialTabIndex];
-        if (initialTab && navRef.current) {
-            const tabRect = initialTab.getBoundingClientRect();
-            const navRect = navRef.current.getBoundingClientRect();
-            setSelTabInfo({ left: tabRect.left - navRect.left, width: tabRect.width });
-        }
+        updateTabInfo(initialTabIndex);
+    }, [selTab]);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const selectedIndex = tabs.indexOf(selTab);
+            updateTabInfo(selectedIndex);
+        };
+
+        window.addEventListener('resize', handleResize);
+
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, [selTab, tabs]);
 
     return (
-        <div className="relative flex items-center ml-10">
-            <nav ref={navRef} className="relative flex bg-gray-800 text-white px-10 py-4 gap-x-10 mt-5 rounded-lg">
+        <div className="relative flex justify-center items-center w-full">
+            <nav ref={navRef} className="fixed top-0 w-full flex justify-center bg-gray-800 text-white px-10 py-4 gap-x-10 rounded-b-lg">
                 {tabs.map((tab, index) => (
                     <NavBarBtn 
                         key={tab} 
@@ -44,7 +56,7 @@ const NavBar = () => {
             </nav>
         </div>
     );
-}
+};
 
 const NavBarBtn = React.forwardRef(({ text, onClick }, ref) => {
     return (
@@ -65,6 +77,6 @@ const NavBarSelected = ({ left, width }) => {
             style={{ left, width }}
         ></span>
     );
-}
+};
 
 export default NavBar;
