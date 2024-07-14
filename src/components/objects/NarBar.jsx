@@ -1,10 +1,13 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
+
+import MyContext from '../../MyContext';
 
 const NavBar = () => {
     const [selTab, changeSelTab] = useState("About Me");
     const [selTabInfo, setSelTabInfo] = useState({ left: 0, width: 0 });
+    const {setSelTab} = useContext(MyContext);
 
-    const tabs = ["About Me", "Websites", "Games", "Contact"];
+    const tabs = ["About Me", "Websites", "Other Projects", "Contact"];
     const tabRefs = useRef([]);
     const navRef = useRef(null);
 
@@ -19,6 +22,7 @@ const NavBar = () => {
 
     const onClickTab = (tabName, index) => {
         changeSelTab(tabName);
+        setSelTab(index);
         updateTabInfo(index);
     };
 
