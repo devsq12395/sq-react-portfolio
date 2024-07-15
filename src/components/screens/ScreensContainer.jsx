@@ -1,9 +1,11 @@
 import React, { useRef, useEffect, useContext } from 'react';
 import MyContext from '../../MyContext';
+
 import Screen from './Screen';
 import AboutMe from './AboutMe';
 import Websites from './Websites';
 import Contact from './Contact';
+import OtherProjects from './OtherProjects';
 
 const ScreensContainer = () => {
   const { selTab } = useContext(MyContext);
@@ -13,7 +15,7 @@ const ScreensContainer = () => {
     const handleResize = () => {
       const container = containerRef.current;
       if (container) {
-        container.style.width = `${window.innerWidth * 4}px`; // Adjusted to accommodate four screens
+        container.style.width = `${window.innerWidth * 4}px`;
       }
     };
 
@@ -48,11 +50,13 @@ const ScreensContainer = () => {
         </div>
         <div className="w-screen">
           <Screen>
-            <Contact />
+            <OtherProjects />
           </Screen>
         </div>
         <div className="w-screen">
-          <Contact />
+          <Screen>
+            <Contact />
+          </Screen>
         </div>
       </div>
     </div>

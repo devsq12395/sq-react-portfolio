@@ -17,10 +17,10 @@ const projectsData = [
   },
 ];
 
-const Websites = () => {
+const OtherProjects = () => {
   return (
     <div className="relative h-full w-full p-8 flex flex-col justify-center items-center" style={{ height: '100vh' }}>
-      <h2 className="text-3xl font-bold mb-8">My Projects</h2>
+      <h2 className="text-3xl font-bold mb-8">My contributions to company A</h2>
       <div className="grid gap-8 w-full" style={{ width: '60%' }}>
         {projectsData.map((project, index) => (
           <div key={index} className="flex flex-col md:flex-row items-center bg-white shadow-md rounded-lg p-6">
@@ -40,4 +40,4 @@ const Websites = () => {
   );
 };
 
-export default Websites;
+export default OtherProjects;
