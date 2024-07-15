@@ -24,7 +24,7 @@ const OtherProjects = () => {
       <div className="grid gap-8 w-full" style={{ width: '60%' }}>
         {projectsData.map((project, index) => (
           <div key={index} className="flex flex-col md:flex-row items-center bg-white shadow-md rounded-lg p-6">
-            <img src={project.imageUrl} alt={project.title} className="w-32 h-32 object-cover rounded-full md:mr-6 mb-4 md:mb-0" />
+            <img src={project.imageUrl} alt={project.title} className="w-32 h-32 object-cover md:mr-6 mb-4 md:mb-0" />
             <div className="flex flex-col text-center md:text-left">
               <h3 className="text-2xl font-bold mb-2">{project.title}</h3>
               <p className="text-gray-700 mb-4">{project.description}</p>
